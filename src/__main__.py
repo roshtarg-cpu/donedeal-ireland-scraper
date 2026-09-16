@@ -41,9 +41,19 @@ async def main():
             Actor.log.info(f"Scraping: {url}")
             
             try:
+                # Apply playwright-stealth for Cloudflare bypass
+                try:
+                    from playwright_stealth import stealth_async
+                    await stealth_async(page)
+                    Actor.log.info("Stealth mode applied")
+                except ImportError:
+                    Actor.log.warning("playwright-stealth not available, continuing without it")
+                
                 # Wait for content to load
-                await page.wait_for_load_state('networkidle', timeout=15000)
-                await page.wait_for_selector('body', timeout=10000)
+                await page.wait_for_load_state('networkidle', timeout=30000)
+                
+                # Additional wait for dynamic content
+                await page.wait_for_timeout(3000)
                 
                 # Check if this is a listing detail page or search results
                 is_detail = '/for-sale/' in url or '/cars-for-sale/' in url or '/ad/' in url
@@ -74,7 +84,7 @@ async def main():
             except Exception as e:
                 Actor.log.error(f"Error scraping {url}: {str(e)}")
         
-        # Create crawler with stealth mode for Cloudflare
+        # Create crawler with browser options for Cloudflare bypass
         crawler = PlaywrightCrawler(
             request_handler=request_handler,
             max_requests_per_crawl=max_results + 10,
@@ -86,12 +96,14 @@ async def main():
         # Run the crawler
         await crawler.run(start_urls)
         
+        # Get environment info
+        env = Actor.get_env()
+        
         # Save task info
         await Actor.set_value('SAVED-TASK', {
-            'actorId': Actor.config.actor_id,
-            'actorRunId': Actor.config.actor_run_id,
-            'defaultDatasetId': Actor.config.default_dataset_id,
-            'startedAt': Actor.config.started_at.isoformat() if Actor.config.started_at else None,
+            'actorId': env.get('actor_id'),
+            'actorRunId': env.get('actor_run_id'),
+            'defaultDatasetId': env.get('default_dataset_id'),
             'input': actor_input,
             'stats': {
                 'results_scraped': results_count,
