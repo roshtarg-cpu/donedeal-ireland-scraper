@@ -85,18 +85,12 @@ async def main():
                 Actor.log.error(f"Error scraping {url}: {str(e)}")
         
         # Create crawler with browser options for Cloudflare bypass
-        # Configure proxy if needed
-        if proxy_config and proxy_config.get('useApifyProxy'):
-            proxy_conf = await Actor.create_proxy_configuration()
-        else:
-            proxy_conf = None
-            
+        # Note: Proxy configuration is handled by Apify platform when useApifyProxy is set in input
         crawler = PlaywrightCrawler(
             request_handler=request_handler,
             max_requests_per_crawl=max_results + 10,
             headless=True,
             browser_type='chromium',
-            proxy_configuration=proxy_conf,
         )
         
         # Run the crawler
