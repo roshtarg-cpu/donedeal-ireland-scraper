@@ -1,0 +1,65 @@
+{
+  "title": "DoneDeal Ireland Scraper Input",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "startUrls": {
+      "title": "Start URLs",
+      "type": "array",
+      "description": "List of DoneDeal.ie URLs to scrape (optional - leave empty to use category + filters)",
+      "editor": "requestListSources",
+      "default": [],
+      "prefill": [
+        { "url": "https://www.donedeal.ie/cars" }
+      ]
+    },
+    "category": {
+      "title": "Category",
+      "type": "string",
+      "description": "Category to scrape",
+      "enum": ["all", "cars", "property-for-sale", "property-to-rent", "jobs", "farming", "services"],
+      "enumTitles": ["All Categories", "Cars & Vehicles", "Property for Sale", "Property to Rent", "Jobs", "Farming Equipment", "Services"],
+      "default": "cars",
+      "editor": "select"
+    },
+    "county": {
+      "title": "County",
+      "type": "string",
+      "description": "Filter by Irish county (optional)",
+      "enum": ["", "dublin", "cork", "galway", "limerick", "kerry", "mayo", "donegal", "waterford", "clare", "wexford", "tipperary", "kilkenny", "westmeath", "meath", "louth", "kildare", "wicklow", "offaly", "sligo", "laois", "carlow", "monaghan", "cavan", "roscommon", "leitrim", "longford"],
+      "enumTitles": ["All Counties", "Dublin", "Cork", "Galway", "Limerick", "Kerry", "Mayo", "Donegal", "Waterford", "Clare", "Wexford", "Tipperary", "Kilkenny", "Westmeath", "Meath", "Louth", "Kildare", "Wicklow", "Offaly", "Sligo", "Laois", "Carlow", "Monaghan", "Cavan", "Roscommon", "Leitrim", "Longford"],
+      "default": "",
+      "editor": "select"
+    },
+    "priceMin": {
+      "title": "Minimum Price (€)",
+      "type": "integer",
+      "description": "Minimum price filter",
+      "default": 0,
+      "minimum": 0
+    },
+    "priceMax": {
+      "title": "Maximum Price (€)",
+      "type": "integer",
+      "description": "Maximum price filter (0 = no limit)",
+      "default": 0,
+      "minimum": 0
+    },
+    "maxResults": {
+      "title": "Max Results",
+      "type": "integer",
+      "description": "Maximum number of listings to scrape",
+      "default": 100,
+      "minimum": 1,
+      "maximum": 10000
+    },
+    "proxyConfiguration": {
+      "title": "Proxy Configuration",
+      "type": "object",
+      "description": "Proxy settings for bypassing restrictions",
+      "default": { "useApifyProxy": true },
+      "editor": "proxy"
+    }
+  },
+  "required": []
+}

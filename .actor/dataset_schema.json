@@ -1,0 +1,78 @@
+{
+  "title": "DoneDeal Ireland Listings",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "title": {
+      "title": "Listing Title",
+      "type": "string",
+      "description": "Title of the listing"
+    },
+    "price": {
+      "title": "Price",
+      "type": "string",
+      "description": "Price in EUR"
+    },
+    "location": {
+      "title": "Location",
+      "type": "string",
+      "description": "County or area"
+    },
+    "category": {
+      "title": "Category",
+      "type": "string",
+      "description": "Main category (cars, property, jobs, etc.)"
+    },
+    "subcategory": {
+      "title": "Subcategory",
+      "type": "string",
+      "description": "Specific subcategory"
+    },
+    "description": {
+      "title": "Description",
+      "type": "string",
+      "description": "Full listing description"
+    },
+    "images": {
+      "title": "Images",
+      "type": "array",
+      "description": "Array of image URLs",
+      "items": {
+        "type": "string"
+      }
+    },
+    "url": {
+      "title": "Listing URL",
+      "type": "string",
+      "description": "Full URL to the listing"
+    },
+    "listingId": {
+      "title": "Listing ID",
+      "type": "string",
+      "description": "Unique listing identifier"
+    },
+    "datePosted": {
+      "title": "Date Posted",
+      "type": "string",
+      "description": "When the listing was posted"
+    },
+    "seller": {
+      "title": "Seller Info",
+      "type": "object",
+      "description": "Seller contact information",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "specifications": {
+      "title": "Specifications",
+      "type": "object",
+      "description": "Category-specific specifications (e.g., mileage for cars, bedrooms for property)"
+    }
+  }
+}

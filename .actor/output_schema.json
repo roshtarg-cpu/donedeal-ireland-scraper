@@ -1,0 +1,13 @@
+{
+  "$schema": "https://apify.com/schemas/v1/output.ide.json",
+  "title": "Dataset Output",
+  "type": "object",
+  "properties": {
+    "dataset": {
+      "title": "Dataset",
+      "type": "string",
+      "description": "Link to the dataset with scraped listings",
+      "editor": "textfield"
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "$schema": "https://apify.com/schemas/v1/actor.ide.json",
+  "actorSpecification": 1,
+  "name": "donedeal-ireland-scraper",
+  "title": "DoneDeal Ireland Scraper — Irish Classifieds",
+  "description": "Extract listings from DoneDeal.ie across all categories (cars, property, jobs, farming, services). Returns title, price, location, description, images, contact details. Works with Claude, ChatGPT, AI agents via Apify MCP. Covers all Irish counties with rich filtering.",
+  "version": "1.0",
+  "meta": {
+    "templateId": "python-crawlee-playwright"
+  },
+  "input": "./input_schema.json",
+  "dockerfile": "./Dockerfile",
+  "readme": "./README.md",
+  "categories": ["LEAD_GENERATION", "ECOMMERCE", "REAL_ESTATE"],
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "views": {
+        "overview": {
+          "title": "Overview",
+          "transformation": {
+            "fields": [
+              "title",
+              "price",
+              "location",
+              "category",
+              "url"
+            ]
+          },
+          "display": {
+            "component": "table",
+            "properties": {
+              "title": {
+                "label": "Title",
+                "format": "text"
+              },
+              "price": {
+                "label": "Price",
+                "format": "text"
+              },
+              "location": {
+                "label": "Location",
+                "format": "text"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
