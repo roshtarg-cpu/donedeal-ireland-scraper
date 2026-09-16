@@ -4,7 +4,7 @@ Extracts listings from DoneDeal.ie across all categories
 """
 import asyncio
 from urllib.parse import urljoin
-from crawlee.playwright_crawler import PlaywrightCrawler, PlaywrightCrawlingContext
+from crawlee.crawlers import PlaywrightCrawler, PlaywrightCrawlingContext
 from apify import Actor
 
 async def main():
