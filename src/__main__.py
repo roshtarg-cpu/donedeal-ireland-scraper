@@ -22,7 +22,10 @@ async def main():
         # Build start URL if not provided
         if not start_urls:
             base_url = f"https://www.donedeal.ie/{category}"
-            start_urls = [{'url': base_url}]
+            start_urls = [base_url]  # Crawlee 1.x expects list of URLs as strings
+        else:
+            # Convert dict format to strings if needed
+            start_urls = [url if isinstance(url, str) else url.get('url') for url in start_urls]
         
         Actor.log.info(f"Starting scrape: category={category}, county={county}, max_results={max_results}")
         
